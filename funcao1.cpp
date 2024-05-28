@@ -3,12 +3,13 @@
 #include <string>
 using namespace std;
 int menu;
-int ID[1000];
-string Titulo[1000];
-string Descricao[1000];
-string DataDeVencimento[1000];
-string status[1000];
+int ID[100];
+string Titulo[100];
+string Descricao[100];
+string DataDeVencimento[100];
+string status[100];
 int controle = 0;
+int removerid = -1;
 int main () {
 
     do
@@ -24,16 +25,17 @@ int main () {
     cin >> menu;
      
      if (menu == 1) {
-        cout << "ID: ";
-        cin >> ID[1000];
-        cout << "Titulo: ";
-        cin.ignore(); getline(cin, Titulo[1000]);
+        
+        ID[controle] = controle;
+        cout << "ID: " << controle << endl;
+        cout << "Titulo: " << endl;
+        cin >> Titulo[controle];
         cout << "Descrição: " << endl;
-        cin.ignore(); getline(cin, Descricao[1000]);
+        cin >> Descricao[controle];
         cout << "Data De Vencimento: " << endl;
-        cin.ignore(); getline(cin, DataDeVencimento[1000]);
+        cin >> DataDeVencimento[controle];
         cout << "Status: " << endl;
-        cin.ignore(); getline(cin, status[1000]);
+        cin >> status[controle];
     controle ++;
 
     }
@@ -42,20 +44,41 @@ int main () {
 
     if  (menu == 2) {
         for (int i = 0; i < controle; i++)
-        {
+        if (ID[i] != -1) {   
+            
           
         
          
-        cout << ID[i] << endl;
-        cout << Titulo[i] << endl;
-        cout << Descricao[i] << endl;
-        cout << DataDeVencimento[i] << endl;
-        cout << status[i] << endl;
-    }   }
+        cout << "ID: " << ID[i] << endl;
+        cout << "Titulo: " << Titulo[i] << endl;
+        cout << "Descrição: " << Descricao[i] << endl;
+        cout << "DataDeVencimento: " << DataDeVencimento[i] << endl;
+        cout << "Status: " << status[i] << endl;
+        }
+    }   
     
-    } while (menu != 0);
-    
+    if (menu == 3) {
+        cout << "Digite o ID da tarefa que deseja remover: " << endl;
+        cin >> removerid;
+        for (int i = 0; i < controle; i++) {
+            if (ID[i] == removerid) {
+                removerid = i;
+            } 
+            if (removerid != -1) {
+                ID[i] = -1;
+            }
+        }
+        
+     
+      
+       
     
 
-        return 0;    
+       
+ }
     }
+ while (menu != 0);
+ return 0;    
+}
+
+    
