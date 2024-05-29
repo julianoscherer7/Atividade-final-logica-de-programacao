@@ -8,12 +8,14 @@ string Titulo[100];
 string Descricao[100];
 string DataDeVencimento[100];
 string status[100];
-int controle = 0;
+int editar;
+int controle = 1;
 int removerid = -1;
+string statusbusca;
+string busca;
 int main () {
 
-    do
-    {
+    do {
         cout << "Olá, seja bem vindo ao Gerenciador de Tarefas. Escolha uma função: " << endl;
     cout << "1. Adicione uma tarefa "<< endl;
     cout << "2. Visualize suas tarefas" << endl; 
@@ -34,7 +36,7 @@ int main () {
         cin >> Descricao[controle];
         cout << "Data De Vencimento: " << endl;
         cin >> DataDeVencimento[controle];
-        cout << "Status: " << endl;
+        cout << "Status: (1 - Pendente, 2 - Em Progresso, 3 - Concluída): " << endl;
         cin >> status[controle];
     controle ++;
 
@@ -42,9 +44,9 @@ int main () {
     
   
 
-    if  (menu == 2) {
-        for (int i = 0; i < controle; i++)
-        if (ID[i] != -1) {   
+    else if (menu == 2) {
+        for (int i = 0; i < controle; i++) {
+        if (ID[i] != -1)  {
             
           
         
@@ -54,20 +56,77 @@ int main () {
         cout << "Descrição: " << Descricao[i] << endl;
         cout << "DataDeVencimento: " << DataDeVencimento[i] << endl;
         cout << "Status: " << status[i] << endl;
-        }
-    }   
+            }
+        } 
+    }  
     
-    if (menu == 3) {
+    else if (menu == 3) {
         cout << "Digite o ID da tarefa que deseja remover: " << endl;
         cin >> removerid;
         for (int i = 0; i < controle; i++) {
-            if (ID[i] == removerid) {
-                removerid = i;
-            } 
-            if (removerid != -1) {
+            if (ID[i] == removerid) {        
                 ID[i] = -1;
+                }
+        
+            }
+        
+        }
+        else if (menu == 4) {
+        cout << "Digite o ID da tarefa que deseja editar: ";
+        cin >> editar;
+
+        ID[editar] = editar;
+        cout << "ID: " << editar << endl;
+        cout << "Titulo: " << endl;
+        cin >> Titulo[editar];
+        cout << "Descrição: " << endl;
+        cin >> Descricao[editar];
+        cout << "Data De Vencimento: " << endl;
+        cin >> DataDeVencimento[editar];
+        cout << "Status: " << endl;
+        cin >> status[editar];
+        
+        }
+
+        else if (menu == 5) {
+            cout << "Digite o título da tarefa que deseja buscar: ";
+            cin >> busca;
+            for (int i = 0; i < controle; i++) {
+                if ( busca == Titulo[i]) {
+                    cout << "ID: " << ID[i] << endl;
+                    cout << "Titulo: " << Titulo[i] << endl;
+                    cout << "Descrição: " << Descricao[i] << endl;
+                    cout << "DataDeVencimento: " << DataDeVencimento[i] << endl;
+                    cout << "Status: " << status[i] << endl;
+
+
+                }
+                
+            }
+            
+        }
+        
+        else if (menu == 6) {
+        cout << "Digite o status das tarefas que deseja filtrar: ";
+        cin >> statusbusca;
+        
+        for (int i = 0; i < controle; i++)
+        {
+            if (statusbusca == status[i]) {
+                status[i] = statusbusca;
+                
+                 
+                 cout << "ID: " << ID[i] << endl;
+                    cout << "Titulo: " << Titulo[i] << endl;
+                    cout << "Descrição: " << Descricao[i] << endl;
+                    cout << "DataDeVencimento: " << DataDeVencimento[i] << endl;
+                    cout << "Status: " << status[i] << endl;
+
+            }   
+
             }
         }
+        
         
      
       
@@ -76,7 +135,7 @@ int main () {
 
        
  }
-    }
+    
  while (menu != 0);
  return 0;    
 }
